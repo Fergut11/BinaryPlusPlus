@@ -1,4 +1,5 @@
 #include <bitset>
+#include <cstddef>
 #include <iostream>
 #include <string>
 using namespace std;    
@@ -25,10 +26,17 @@ int get_number(){
     return binary_result;
 }
 
-bitset<32> convert_to_binary(int number){
-    return bitset<32>(number);
+// Takes an int and converts it to a binary string
+// size_t gets the size of a string and the find_first_not_of() looks for the first 1 in the string
+// the substr will only show the bits after the fird found 1
+string convert_to_binary(int number){
+    string bitset_string = bitset<32>(number).to_string();
+    size_t first_one = bitset_string.find_first_not_of("0");
+    return bitset_string.substr(first_one);
+
 }
 
+// prints out the number input from user converted to binary
 int main() {
     cout << convert_to_binary(get_number());
     return 0;
