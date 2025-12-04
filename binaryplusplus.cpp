@@ -13,9 +13,9 @@ int get_number(){
     cout << R"(
     Type a number and it will return as a binary
     Decimal can be as written, Hex should be preceeded with a 0x, Octal with a 0.
-    Dec : 5, 65, 76
-    Hexidecimal : 0xFF43, 0x10F7, 0xABC123
-    Octodecimal : 0771, 0233, 044
+    Dec(0-9) : 5, 65, 76
+    Hexidecimal(0-F) : 0xFF43, 0x10F7, 0xABC123
+    Octodecimal(0-7) : 0771, 0233, 044
     
     )";
     while (true) {
@@ -28,7 +28,10 @@ int get_number(){
             break;
         }
         catch (const invalid_argument&) {
-        cout << "Invalid input: not a number." << endl;
+            cout << "Invalid input: not a number." << endl;
+        }
+        catch(const out_of_range&){
+            cout << "invalid input, out of range" << endl;
         }
     }
     return binary_result;
@@ -58,6 +61,9 @@ char* terminal_conversion(char* terminal_input){
     }
     catch(const invalid_argument&){
         cout << "invalid input" << endl;
+    }
+    catch(const out_of_range&){
+        cout << "invalid input, out of range" << endl;
     }
     return 0;
 }
