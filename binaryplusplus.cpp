@@ -1,6 +1,7 @@
 #include <bitset>
 #include <cstddef>
 #include <iostream>
+#include <stdexcept>
 #include <string>
 using namespace std;    
 
@@ -32,12 +33,34 @@ int get_number(){
 string convert_to_binary(int number){
     string bitset_string = bitset<32>(number).to_string();
     size_t first_one = bitset_string.find_first_not_of("0");
+
+    if (first_one == string::npos){
+        return 0;
+    }
+
     return bitset_string.substr(first_one);
 
 }
 
+char* terminal_conversion(char* terminal_input){
+    try{
+        int result = stoi(string(terminal_input), nullptr, 0);
+        cout << convert_to_binary(result);
+    }
+    catch(const invalid_argument&){
+        cout << "invalid input" << endl;
+    }
+    return 0;
+}
+
+
 // prints out the number input from user converted to binary
-int main() {
-    cout << convert_to_binary(get_number());
+int main(int argc, char* argv[]) {
+    if (argc > 1) {
+       cout << terminal_conversion(argv[1]);
+    }
+    else{
+        cout << convert_to_binary(get_number());
+    }
     return 0;
 }
