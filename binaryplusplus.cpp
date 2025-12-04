@@ -3,7 +3,7 @@
 #include <string>
 using namespace std;    
 
-
+// Gets input from the user as a string and converts it to an int
 int get_number(){
     string user_input;
     int binary_result;
@@ -24,7 +24,12 @@ int get_number(){
     }
     return binary_result;
 }
+
+bitset<32> convert_to_binary(int number){
+    return bitset<32>(number);
+}
+
 int main() {
-    cout << bitset<32>(get_number());
+    cout << convert_to_binary(get_number());
     return 0;
 }
